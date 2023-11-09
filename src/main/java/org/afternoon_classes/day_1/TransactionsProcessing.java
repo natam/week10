@@ -19,11 +19,20 @@ public class TransactionsProcessing {
         transactions.remove(transaction);
     }
 
-    public void processTransactions() {
+    public void processTransaction() {
+        ExecutorService executor = Executors.newFixedThreadPool(20);
+        if (!transactions.isEmpty()) {
+            Transaction transaction = (Transaction) transactions.pop();
+            executor.submit(transaction);
+        }
+        executor.shutdown();
+    }
+
+    public void processAllTransactions() {
         ExecutorService executor = Executors.newFixedThreadPool(20);
         while (!transactions.isEmpty()) {
             Transaction transaction = (Transaction) transactions.pop();
-            executor.submit(transaction::doTransaction);
+            executor.submit(transaction);
         }
         executor.shutdown();
     }

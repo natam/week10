@@ -1,10 +1,5 @@
 package org.afternoon_classes.day_1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 public class Main {
     public static void main(String[] args) {
         BankingSystem bankingSystem = new BankingSystem();
@@ -21,7 +16,7 @@ public class Main {
         bankingSystem.transactionsProcessing.addTransaction(new WithdrawTransaction(myAccount, 125.0));
         bankingSystem.transactionsProcessing.addTransaction(new WithdrawTransaction(myAccount, 25.0));
 
-        bankingSystem.transactionsProcessing.processTransactions();
+        bankingSystem.transactionsProcessing.processAllTransactions();
         System.out.println(myAccount.getBalance());
     }
 }

@@ -1,24 +1,17 @@
 package org.afternoon_classes.day_1;
 
-public class DepositTransaction implements Transaction{
-    BankAccount bankAccount;
-    double transactionAmount;
-
+public class DepositTransaction extends Transaction implements Depositable, Runnable {
     public DepositTransaction(BankAccount account, double transactionAmount){
-        this.transactionAmount = transactionAmount;
-        this.bankAccount = account;
+        super(account, transactionAmount);
     }
-    public double getTransactionAmount() {
-        return transactionAmount;
-    }
-
-    public void setTransactionAmount(double transactionAmount) {
-        this.transactionAmount = transactionAmount;
+    @Override
+    public void depositMoney() {
+        System.out.println("Deposit :" + transactionAmount);
+        bankAccount.setBalance(bankAccount.getBalance()+transactionAmount);
     }
 
     @Override
-    public void doTransaction() {
-        System.out.println("Deposit :" + transactionAmount);
-        bankAccount.setBalance(bankAccount.getBalance()+transactionAmount);
+    public void run() {
+        depositMoney();
     }
 }
